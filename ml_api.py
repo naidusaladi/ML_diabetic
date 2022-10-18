@@ -51,7 +51,7 @@ def diabetes_pred(input_parameters:model_input):
     input_list=[preg,glu,blp,skn,insu,bmi,dipf,age]
     
     prediction = diabetes_model.predict([input_list])
-    return str(prediction)
+    return str([preg,glu,blp,skn,insu,bmi,dipf,age])
     if(prediction[0]==1):
         return '0'
     else:
