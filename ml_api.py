@@ -31,9 +31,9 @@ class model_input(BaseModel):
     DiabetesPedigreeFunction:float
     Age:int
 
-#loding the saved model
-diabetes_model=pickle.load(open('diabetes_model (3).sav','rb'))
-
+#loding the saved models
+diabetes_model=pickle.load(open('diabetes_model.sav','rb'))
+standerd_scaler=pickle.load(open('scale.sav','rb'))
 @app.post('/diabetes_prediction')
 
 def diabetes_pred(input_parameters:model_input):
@@ -49,8 +49,9 @@ def diabetes_pred(input_parameters:model_input):
     age=input_dictionary['Age']
     
     input_list=[preg,glu,blp,skn,insu,bmi,dipf,age]
+    scaled_list=standerd_scaler.transform([input_list])
     
-    prediction = diabetes_model.predict([input_list])
+    prediction = diabetes_model.predict(scaled_list)
     if(prediction[0]==1):
         return 'The person is Diabetic'
     else:
