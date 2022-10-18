@@ -32,7 +32,7 @@ class model_input(BaseModel):
     Age:int
 
 #loding the saved model
-diabetes_model=pickle.load(open('diabetes_model (2).sav','rb'))
+diabetes_model=pickle.load(open('diabetes_model (3).sav','rb'))
 
 @app.post('/diabetes_prediction')
 
